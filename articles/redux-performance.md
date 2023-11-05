@@ -1,3 +1,11 @@
+---
+title: "Reduxでパフォーマンスをよくするためにやったこと(createEntityAdapter編)" # 記事のタイトル
+emoji: "🚀" # アイキャッチとして使われる絵文字（1文字だけ）
+type: "tech" # tech: 技術記事 / idea: アイデア記事
+topics: ['React', 'TypeScript', "Redux", "performance"] # タグ。["markdown", "rust", "aws"]のように指定する
+published: false # 公開設定（falseにすると下書き）
+---
+
 こんにちは！サイボウズ株式会社で [kintone](https://kintone.cybozu.co.jp/) というプロダクトのフロントエンドエンジニアをやっている [Nokogiri](https://twitter.com/nkgrnkgr) です。
 
 kintoneの画面の一部ではフロントエンドの状態管理に [ReduxToolkit](https://redux-toolkit.js.org/) を採用しています。
