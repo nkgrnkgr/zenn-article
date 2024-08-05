@@ -85,9 +85,17 @@ expect(dialog).toBeInTheDocument();
 https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
 
 
+### 警告表示
 
+TODO: ここに画像を挿入
 
+- **alert**というロールで取得可能
 
+テストコード
+```tsx
+const alert = screen.getByRole("alert");
+expect(alert).toHaveTextContent("アラート");
+```
 
 ## 成果物
 
