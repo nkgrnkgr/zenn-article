@@ -29,4 +29,56 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 [chakraのコンポーネント集](https://v2.chakra-ui.com/docs/components)からよく使われると思われるものやロールに特徴があるもの**26個**を抜粋して作成しています。
 
+## 事例紹介
+
+以下26個のコンポーネントに関してそれぞれ「UI」「ロールを使ったテスト」を記述します。
+
+### Modal
+
+## 成果物
+
+今回の調査に当たって作成したものは以下のレポジトリに公開しています。
+自動テストを書くときの参考にしていただけると幸いです。
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/
+
+## 付録A: Chromeで[WAI-ARIA ロール](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles)を確認する方法
+
+ChromeのdevtoolのsettingsからExperimentsを選択し **Enable full accessibility tree view in the Styles tab** にチェックを入れます。
+
+Elementsタブにアクセシビリティマークが表示されるようになります。
+
+## 付録B: useIdを使って表示とlabelを紐付ける
+
+入力要素ではない表示要素に対して何の要素なのか説明を紐付ける際に以下のように実装することで読み上げができます。
+
+Reactでは [**useId**](https://ja.react.dev/reference/react/useId) というランダムな id を生成するHooksを提供しています。
+
+これを使うことでa11yの紐付けが容易になります。
+
+またテストでは **getByLabelText** を使うことで表示要素が取得できます。
+
+
+コンポーネント
+```tsx
+const id = useId();
+return (
+  <div>
+    <p id={id}>手数料</p>
+    <p aria-labelledby={id}>250円</p>
+  </div>
+)
+
+```
+
+テスト
+```tsx
+const fee = screen.getByLabelText('手数料');
+expect(fee.textContent).toBe('250円');
+
+```
+
+
+
+
 
