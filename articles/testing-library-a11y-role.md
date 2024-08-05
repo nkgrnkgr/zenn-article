@@ -33,10 +33,9 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 以下26個のコンポーネントに関してそれぞれ「UI」「ロールを使ったテスト」を記述します。
 
-### Modal
+### モーダル
 
 TODO: ここに画像を挿入
-
 
 - Modalは**dialog**というロールで取得可能
 
@@ -57,6 +56,30 @@ await user.click(closeButton);
 await waitFor(() => {
   expect(screen.queryByRole("dialog")).toBeNull();
 });
+```
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
+
+
+### 警告ダイアログ
+
+TODO: ここに画像を挿入
+
+- **alertdialog**というロールで取得可能
+
+テストコード
+
+```tsx
+const user = userEvent.setup();
+const button = screen.getByRole("button", {
+  name: "警告ダイアログを開く",
+});
+await user.click(button);
+
+const dialog = await screen.findByRole("alertdialog", {
+  name: "削除の確認",
+});
+expect(dialog).toBeInTheDocument();
 ```
 
 https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
