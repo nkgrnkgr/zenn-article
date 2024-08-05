@@ -35,6 +35,37 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 ### Modal
 
+TODO: ここに画像を挿入
+
+
+- Modalは**dialog**というロールで取得可能
+
+テストコード
+
+```tsx
+const user = userEvent.setup();
+const button = screen.getByRole("button", { name: "モーダルを開く" });
+await user.click(button);
+
+const dialog = await screen.findByRole("dialog");
+expect(dialog).toBeInTheDocument();
+
+const closeButton = within(dialog).getByRole("button", {
+  name: "閉じる",
+});
+await user.click(closeButton);
+await waitFor(() => {
+  expect(screen.queryByRole("dialog")).toBeNull();
+});
+```
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
+
+
+
+
+
+
 ## 成果物
 
 今回の調査に当たって作成したものは以下のレポジトリに公開しています。
@@ -47,6 +78,8 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/
 ChromeのdevtoolのsettingsからExperimentsを選択し **Enable full accessibility tree view in the Styles tab** にチェックを入れます。
 
 Elementsタブにアクセシビリティマークが表示されるようになります。
+
+TODO: ここに画像を挿入
 
 ## 付録B: useIdを使って表示とlabelを紐付ける
 
@@ -68,7 +101,6 @@ return (
     <p aria-labelledby={id}>250円</p>
   </div>
 )
-
 ```
 
 テスト
