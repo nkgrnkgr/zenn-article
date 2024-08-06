@@ -178,6 +178,20 @@ const code = screen.getByRole("code", {
 expect(code).toBeInTheDocument();
 ```
 
+### 区切り線
+
+
+TODO: ここに画像を挿入
+
+- ロール：**separator**
+
+テストコード
+```tsx
+const divider = screen.getByRole("separator", {
+  name: "区切り",
+});
+expect(divider).toBeInTheDocument();
+```
 
 ## 成果物
 
