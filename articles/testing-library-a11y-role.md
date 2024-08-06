@@ -29,6 +29,13 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 [chakraのコンポーネント集](https://v2.chakra-ui.com/docs/components)からよく使われると思われるものやロールに特徴があるもの**26個**を抜粋して作成しています。
 
+## UI毎のロール早見表
+
+| UI | Role |
+| ---- | ---- |
+| TD | TD |
+| TD | TD |
+
 ## 事例紹介
 
 以下26個のコンポーネントに関してそれぞれ「UI」「ロールを使ったテスト」を記述します。
@@ -65,7 +72,7 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Mo
 
 TODO: ここに画像を挿入
 
-- **alertdialog**というロールで取得可能
+- ロール：**alertdialog**
 
 テストコード
 
@@ -89,12 +96,57 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Mo
 
 TODO: ここに画像を挿入
 
-- **alert**というロールで取得可能
+- ロール：**alert**
 
 テストコード
 ```tsx
 const alert = screen.getByRole("alert");
 expect(alert).toHaveTextContent("アラート");
+```
+
+### パンくず
+
+TODO: ここに画像を挿入
+
+- ロール：**navigation***
+- 内部のリンクのロールは**link**
+
+テストコード
+
+```tsx
+const breadcrumb = screen.getByRole("navigation", {
+  name: "breadcrumb",
+});
+expect(breadcrumb).toBeInTheDocument();
+
+const items = within(breadcrumb)
+  .getAllByRole("listitem")
+  .map((i) => {
+    const link = within(i).queryByRole("link");
+    return link === null
+      ? {
+          text: i.textContent,
+          href: "",
+        }
+      : {
+          text: link.textContent,
+          href: link.getAttribute("href"),
+        };
+  });
+expect(items).toEqual([
+  {
+    text: "Home",
+    href: "#",
+  },
+  {
+    text: "一覧",
+    href: "#",
+  },
+  {
+    text: "アイテム1",
+    href: "",
+  },
+]);
 ```
 
 ## 成果物
