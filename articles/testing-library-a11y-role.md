@@ -149,6 +149,36 @@ expect(items).toEqual([
 ]);
 ```
 
+### チェックボックス
+
+TODO: ここに画像を挿入
+
+- ロール：**checkbox**
+
+テストコード
+```tsx
+const checkbox = screen.getByRole("checkbox", {
+  name: "Checkbox",
+}) as HTMLInputElement;
+expect(checkbox.checked).toBe(true);
+```
+
+### コード表示
+
+
+TODO: ここに画像を挿入
+
+- ロール：**code**
+
+テストコード
+```tsx
+const code = screen.getByRole("code", {
+  name: "JavaScript Code!",
+});
+expect(code).toBeInTheDocument();
+```
+
+
 ## 成果物
 
 今回の調査に当たって作成したものは以下のレポジトリに公開しています。
