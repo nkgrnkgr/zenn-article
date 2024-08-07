@@ -29,6 +29,13 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 [chakraのコンポーネント集](https://v2.chakra-ui.com/docs/components)からよく使われると思われるものやロールに特徴があるもの**26個**を抜粋して作成しています。
 
+## 成果物
+
+今回の調査に当たって作成したものは以下のレポジトリに公開しています。
+自動テストを書くときの参考にしていただけると幸いです。
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/
+
 ## UI毎のロール早見表
 
 | UI | Role |
@@ -83,7 +90,7 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Al
 
 ![パンくず](https://storage.googleapis.com/zenn-user-upload/6a7ab180da0f-20240807.png)
 
-- ロール：**navigation***
+- ロール：**navigation**
 - 内部のリンクのロールは**link**
 
 テストコード
@@ -377,12 +384,6 @@ await waitFor(() => {
 });
 ```
 
-## 成果物
-
-今回の調査に当たって作成したものは以下のレポジトリに公開しています。
-自動テストを書くときの参考にしていただけると幸いです。
-
-https://github.com/nkgrnkgr/testing-library-and-a11y/
 
 ## 付録A: Chromeで[WAI-ARIA ロール](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles)を確認する方法
 
