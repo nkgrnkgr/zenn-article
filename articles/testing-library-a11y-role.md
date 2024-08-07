@@ -40,34 +40,6 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 以下26個のコンポーネントに関してそれぞれ「UI」「ロールを使ったテスト」を記述します。
 
-### モーダル
-
-![modalの画像](https://storage.googleapis.com/zenn-user-upload/9b9b3c237cf2-20240807.gif)
-
-- ロール：**dialog**
-
-テストコード
-
-```tsx
-const user = userEvent.setup();
-const button = screen.getByRole("button", { name: "モーダルを開く" });
-await user.click(button);
-
-const dialog = await screen.findByRole("dialog");
-expect(dialog).toBeInTheDocument();
-
-const closeButton = within(dialog).getByRole("button", {
-  name: "閉じる",
-});
-await user.click(closeButton);
-await waitFor(() => {
-  expect(screen.queryByRole("dialog")).toBeNull();
-});
-```
-
-コード：
-https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
-
 
 ### 警告ダイアログ
 
@@ -194,6 +166,215 @@ const divider = screen.getByRole("separator", {
   name: "区切り",
 });
 expect(divider).toBeInTheDocument();
+```
+
+### ドロアー
+
+TODO: ここに画像
+
+- ロール：**dialog**
+
+テストコード
+```tsx
+const user = userEvent.setup();
+const button = screen.getByRole("button", {
+  name: "ドロアーを開く",
+});
+await user.click(button);
+const drawer = await screen.findByRole("dialog", {
+  name: "アカウントの作成",
+});
+expect(drawer).toBeInTheDocument();
+```
+
+### テキスト入力
+
+
+TODO: ここに画像
+
+- ロール：**textbox**
+
+テストコード
+```tsx
+const user = userEvent.setup();
+const emailInput = screen.getByRole("textbox", {
+  name: "Email",
+}) as HTMLInputElement;
+expect(emailInput.value).toBe("xxx@gmail.com");
+await user.clear(emailInput);
+expect(
+  screen.getByText("Emailのフォーマットが正しくありません"),
+).toBeInTheDocument();
+```
+
+### 見出し
+
+TODO: ここに画像
+
+- ロール：**heading**
+
+テストコード
+```tsx
+const heading = screen.getByRole("heading", {
+  name: "見出し",
+});
+expect(heading).toBeInTheDocument();
+```
+
+### 画像
+
+TODO: ここに画像
+
+- ロール：**img**
+
+```tsx
+const image = screen.getByRole("img", {
+  name: "150 x 150 placeholder",
+});
+expect(image).toBeInTheDocument();
+```
+
+### リンク
+
+TODO: ここに画像
+
+- ロール：**link**
+
+```tsx
+const link = screen.getByRole("link", {
+  name: "Github.com",
+});
+expect(link).toBeInTheDocument();
+expect(link.getAttribute("href")).toBe("https://github.com");
+```
+
+### リスト
+
+TODO: ここに画像
+
+- ロール：**list**
+- リスト内の要素は **listitem**
+
+```tsx
+const link = screen.getByRole("link", {
+  name: "Github.com",
+});
+const list = screen.getByRole("list", {
+  name: "リスト",
+});
+expect(list).toBeInTheDocument();
+const listItems = within(list).getAllByRole("listitem");
+expect(listItems).toHaveLength(3);
+const textContents = listItems.map((i) => i.textContent);
+expect(textContents.sort()).toEqual(
+  ["アイテム 1", "アイテム 2", "アイテム 3"].sort(),
+);
+```
+
+### ローディング
+
+TODO: ここに画像
+
+- ロール：**alert**
+
+```tsx
+const loading = screen.getByRole("alert");
+expect(loading).toBeInTheDocument();
+```
+
+### メニュー
+
+TODO: ここに画像
+
+- ロール：**menu**
+- メニュー内の要素は **menuitem**
+
+```tsx
+const user = userEvent.setup();
+const button = screen.getByRole("button", { name: "メニューを開く" });
+await user.click(button);
+
+const menu = await screen.findByRole("menu");
+const menuItems = within(menu).getAllByRole("menuitem");
+expect(menuItems).toHaveLength(4);
+const textContents = menuItems.map((i) => i.textContent);
+expect(textContents.sort()).toEqual(
+  ["個人設定", "購入履歴", "アカウントの切り替え", "ログアウト"].sort(),
+);
+```
+
+### モーダル
+
+![modalの画像](https://storage.googleapis.com/zenn-user-upload/9b9b3c237cf2-20240807.gif)
+
+- ロール：**dialog**
+
+テストコード
+
+```tsx
+const user = userEvent.setup();
+const button = screen.getByRole("button", { name: "モーダルを開く" });
+await user.click(button);
+
+const dialog = await screen.findByRole("dialog");
+expect(dialog).toBeInTheDocument();
+
+const closeButton = within(dialog).getByRole("button", {
+  name: "閉じる",
+});
+await user.click(closeButton);
+await waitFor(() => {
+  expect(screen.queryByRole("dialog")).toBeNull();
+});
+```
+
+コード：
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
+
+### 数値入力
+
+TODO: ここに画像
+
+- ロール：**spinbutton**
+
+```tsx
+const user = userEvent.setup();
+const numberInput = screen.getByRole("spinbutton", {
+  name: "数値入力",
+}) as HTMLInputElement;
+expect(numberInput.value).toBe("10");
+await user.clear(numberInput);
+await user.type(numberInput, "999");
+expect(numberInput.value).toBe("999");
+await user.type(numberInput, "{arrowup}");
+expect(numberInput.value).toBe("1000");
+await user.type(numberInput, "{arrowdown}");
+expect(numberInput.value).toBe("999");
+```
+
+### ポップオーバー
+
+TODO: ここに画像
+
+- ロール：**dialog**
+
+```tsx
+const user = userEvent.setup();
+const button = screen.getByRole("button", { name: "ポップオーバーを開く" });
+await user.click(button);
+
+const dialog = await screen.findByRole("dialog", {
+  name: "ポップオーバー",
+});
+expect(dialog).toBeInTheDocument();
+
+const closeButton = within(dialog).getByRole("button", {
+  name: "Close",
+});
+await user.click(closeButton);
+await waitFor(() => {
+  expect(screen.queryByRole("dialog")).toBeNull();
+});
 ```
 
 ## 成果物
