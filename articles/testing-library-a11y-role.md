@@ -10,6 +10,7 @@ published: false # 公開設定（falseにすると下書き）
 このたびはCybozu Summer Blog Fes'24にて執筆の機会をいただきましたので、僭越ながら寄稿させていただきます。
 
 今回は**React Testing LibraryでのWAI-ARIAロールの活用事例**について紹介させていただきます。
+
 ## 前提
 
 Reactで書かれたUIをテストする方法の一つとして[Testing Library](https://testing-library.com/) があります。
@@ -70,7 +71,7 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Mo
 
 ### 警告ダイアログ
 
-TODO: ここに画像を挿入
+![警告ダイアログ](https://storage.googleapis.com/zenn-user-upload/d2260e98980f-20240807.gif)
 
 - ロール：**alertdialog**
 
@@ -89,12 +90,11 @@ const dialog = await screen.findByRole("alertdialog", {
 expect(dialog).toBeInTheDocument();
 ```
 
-https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
-
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/AlertDialogDisplay
 
 ### 警告表示
 
-TODO: ここに画像を挿入
+![警告表示](https://storage.googleapis.com/zenn-user-upload/d137df93dd36-20240807.png)
 
 - ロール：**alert**
 
@@ -104,9 +104,12 @@ const alert = screen.getByRole("alert");
 expect(alert).toHaveTextContent("アラート");
 ```
 
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/AlertDisplay
+
+
 ### パンくず
 
-TODO: ここに画像を挿入
+![パンくず](https://storage.googleapis.com/zenn-user-upload/6a7ab180da0f-20240807.png)
 
 - ロール：**navigation***
 - 内部のリンクのロールは**link**
@@ -151,7 +154,7 @@ expect(items).toEqual([
 
 ### チェックボックス
 
-TODO: ここに画像を挿入
+![チェックボックス](https://storage.googleapis.com/zenn-user-upload/e8e174337dc3-20240807.png)
 
 - ロール：**checkbox**
 
@@ -166,7 +169,7 @@ expect(checkbox.checked).toBe(true);
 ### コード表示
 
 
-TODO: ここに画像を挿入
+![コード表示](https://storage.googleapis.com/zenn-user-upload/8f37435ba852-20240807.png)
 
 - ロール：**code**
 
@@ -181,7 +184,7 @@ expect(code).toBeInTheDocument();
 ### 区切り線
 
 
-TODO: ここに画像を挿入
+![区切り線](https://storage.googleapis.com/zenn-user-upload/302ba55cf1bd-20240807.png)
 
 - ロール：**separator**
 
