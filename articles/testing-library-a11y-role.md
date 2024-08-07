@@ -10,7 +10,6 @@ published: false # 公開設定（falseにすると下書き）
 このたびはCybozu Summer Blog Fes'24にて執筆の機会をいただきましたので、僭越ながら寄稿させていただきます。
 
 今回は**React Testing LibraryでのWAI-ARIAロールの活用事例**について紹介させていただきます。
-
 ## 前提
 
 Reactで書かれたUIをテストする方法の一つとして[Testing Library](https://testing-library.com/) があります。
@@ -42,9 +41,9 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 ### モーダル
 
-TODO: ここに画像を挿入
+![modalの画像](https://storage.googleapis.com/zenn-user-upload/9b9b3c237cf2-20240807.gif)
 
-- Modalは**dialog**というロールで取得可能
+- ロール：**dialog**
 
 テストコード
 
@@ -65,6 +64,7 @@ await waitFor(() => {
 });
 ```
 
+コード：
 https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ModalDisplay
 
 
@@ -236,8 +236,3 @@ const fee = screen.getByLabelText('手数料');
 expect(fee.textContent).toBe('250円');
 
 ```
-
-
-
-
-
