@@ -384,6 +384,52 @@ await waitFor(() => {
 });
 ```
 
+### プログレスバー
+
+TODO: ここに画像
+
+- ロール：**progressbar**
+
+```tsx
+const progressbar = screen.getByRole("progressbar");
+expect(progressbar).toBeInTheDocument();
+expect(progressbar).toHaveTextContent("40%");
+expect(progressbar).toHaveAttribute("aria-valuemin", "0");
+expect(progressbar).toHaveAttribute("aria-valuemax", "100");
+expect(progressbar).toHaveAttribute("aria-valuenow", "40");
+```
+
+### ラジオ
+
+TODO: ここに画像
+
+- ロール：**radiogroup**
+- 個別の選択肢は：**radio**
+
+```tsx
+const user = userEvent.setup();
+const radioGroup = screen.getByRole("radiogroup", {
+  name: "ユーザー区分",
+});
+const radioIndividual = within(radioGroup).getByRole("radio", {
+  name: "個人",
+}) as HTMLInputElement;
+const radioCorporation = within(radioGroup).getByRole("radio", {
+  name: "法人",
+}) as HTMLInputElement;
+const radioEtc = within(radioGroup).getByRole("radio", {
+  name: "その他",
+}) as HTMLInputElement;
+expect(radioIndividual.checked).toBe(true);
+expect(radioCorporation.checked).toBe(false);
+expect(radioEtc.checked).toBe(false);
+
+await user.click(radioCorporation);
+expect(radioIndividual.checked).toBe(false);
+expect(radioCorporation.checked).toBe(true);
+expect(radioEtc.checked).toBe(false);
+```
+
 
 ## 付録A: Chromeで[WAI-ARIA ロール](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles)を確認する方法
 
