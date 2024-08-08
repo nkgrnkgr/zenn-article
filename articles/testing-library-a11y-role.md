@@ -154,6 +154,8 @@ expect(items).toEqual([
 ]);
 ```
 
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Breadcrumb
+
 ### チェックボックス
 
 ![チェックボックス](https://storage.googleapis.com/zenn-user-upload/e8e174337dc3-20240807.png)
@@ -167,6 +169,8 @@ const checkbox = screen.getByRole("checkbox", {
 }) as HTMLInputElement;
 expect(checkbox.checked).toBe(true);
 ```
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Checkbox
 
 ### コード表示
 
@@ -183,6 +187,8 @@ const code = screen.getByRole("code", {
 expect(code).toBeInTheDocument();
 ```
 
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/CodeDisplay
+
 ### 区切り線
 
 
@@ -197,6 +203,8 @@ const divider = screen.getByRole("separator", {
 });
 expect(divider).toBeInTheDocument();
 ```
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/DividerDisplay
 
 ### ドロアー
 
@@ -216,6 +224,8 @@ const drawer = await screen.findByRole("dialog", {
 });
 expect(drawer).toBeInTheDocument();
 ```
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/DrawerDisplay
 
 ### テキスト入力
 
@@ -237,6 +247,8 @@ expect(
 ).toBeInTheDocument();
 ```
 
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/FormControlDisplay
+
 ### 見出し
 
 ![見出し](https://storage.googleapis.com/zenn-user-upload/bdb3cf964328-20240808.png)
@@ -251,6 +263,8 @@ const heading = screen.getByRole("heading", {
 expect(heading).toBeInTheDocument();
 ```
 
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Heading
+
 ### 画像
 
 ![画像](https://storage.googleapis.com/zenn-user-upload/bcc7a8ea899d-20240808.png)
@@ -263,6 +277,8 @@ const image = screen.getByRole("img", {
 });
 expect(image).toBeInTheDocument();
 ```
+
+https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/ImageDisplay
 
 ### リンク
 
@@ -603,7 +619,9 @@ ChromeのdevtoolのsettingsからExperimentsを選択し **Enable full accessibi
 
 Elementsタブにアクセシビリティマークが表示されるようになります。
 
-TODO: ここに画像を挿入
+![checkbox](https://storage.googleapis.com/zenn-user-upload/f0f9f6ba1f81-20240808.png)
+
+![マーク](https://storage.googleapis.com/zenn-user-upload/4e7591c14e2f-20240808.png)
 
 ## 付録B: useIdを使って表示とlabelを紐付ける
 
