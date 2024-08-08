@@ -430,6 +430,63 @@ expect(radioCorporation.checked).toBe(true);
 expect(radioEtc.checked).toBe(false);
 ```
 
+### セレクト
+
+TODO: ここに画像
+
+- ロール：**combobox**
+- 本来 combobox は入力可能なtextboxに選択肢も含まれるものを指すと思うので適切ではないのかも？
+- [React Aria](https://react-spectrum.adobe.com/react-aria/index.html) だとクリックされるまでは **button** で選択肢がでてからは**listbox**になっている
+
+```tsx
+const user = userEvent.setup();
+const combobox = screen.getByRole("combobox", {
+  name: "ユーザー区分",
+});
+await user.click(combobox);
+await user.selectOptions(combobox, "corporation");
+expect(combobox).toHaveValue("corporation");
+```
+
+### スタッツ
+
+TODO: ここに画像
+
+- ロール：**term**
+
+```tsx
+const statTitle = screen.getByRole("term");
+expect(statTitle).toHaveTextContent("日経平均株価");
+const definitions = screen.getAllByRole("definition");
+const textContents = definitions.map((d) => d.textContent);
+expect(textContents).toEqual([
+  "35,909.70",
+  "decreased by−2,216.63 (5.81%)今日",
+]);
+```
+
+
+### タブとコンテンツ
+
+TODO: ここに画像
+
+- ロール：**tab**
+- タブと紐付くコンテンツについては：**tabpanel**
+
+```tsx
+const user = userEvent.setup();
+const tabPanel1 = screen.getByRole("tabpanel", { name: "One" });
+expect(tabPanel1).toBeInTheDocument();
+const tab2 = screen.getByRole("tab", { name: "Two" });
+await user.click(tab2);
+expect(screen.getByRole("tabpanel", { name: "Two" })).toBeInTheDocument();
+```
+
+## 最後に
+
+今回紹介したUIとロールの組み合わせはあくまでchakraの実装なので、別のライブラリであれば異なるロールが付与されていることもあります。自分でUIを実装する際はいくつかのライブラリを比較して適切なロールを選択できるとよさそうです。
+UIに対して適切にロールが付与されることでし視覚／マウスユーザーだけでなく支援技術を利用するユーザーにとって使いやすいUIになります。
+またテストの書きやすさという観点でも積極的にロールを利用したほうがよいです。
 
 ## 付録A: Chromeで[WAI-ARIA ロール](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles)を確認する方法
 
