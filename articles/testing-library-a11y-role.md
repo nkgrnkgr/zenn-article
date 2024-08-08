@@ -482,6 +482,95 @@ await user.click(tab2);
 expect(screen.getByRole("tabpanel", { name: "Two" })).toBeInTheDocument();
 ```
 
+### テーブル
+
+TODO: ここに画像
+
+- ロール：**table**, **rowgroup**, **columnheader**, **row**, **cell**
+- **rowgroup** は ヘッダー要素とボディー要素に分けられる
+- **columnheader** はヘッダー要素の中のヘッダーセル
+
+```tsx
+const table = screen.getByRole("table", { name: "日本の人口推移" });
+expect(table).toBeInTheDocument();
+const rowgroup = within(table).getAllByRole("rowgroup");
+const headers = within(rowgroup[0])
+  .getAllByRole("columnheader")
+  .map((header) => header.textContent);
+const yearIndex = headers.indexOf("年");
+const populationIndex = headers.indexOf("人口");
+const increaseRateIndex = headers.indexOf("増加率(%)");
+const tableBodyRows = rowgroup[1];
+const rows = within(tableBodyRows).getAllByRole("row");
+const year1975Row = rows.find((row) => {
+  const cells = within(row).getAllByRole("cell");
+  return cells[yearIndex].textContent === "1975";
+});
+assertExists(year1975Row);
+expect(
+  within(year1975Row).getAllByRole("cell")[populationIndex],
+).toHaveTextContent("1億1190万人");
+expect(
+  within(year1975Row).getAllByRole("cell")[increaseRateIndex],
+).toHaveTextContent("34.5%");
+```
+
+### テキストエリア（複数行）
+
+TODO: ここに画像
+
+- ロール：**textbox***
+
+```tsx
+const TEXT = `
+Hello
+world
+`;
+const user = userEvent.setup();
+const textarea = screen.getByRole("textbox", {
+  name: "コメント",
+}) as HTMLInputElement;
+expect(textarea.textContent).toBe("");
+
+await user.type(textarea, TEXT);
+expect(textarea.textContent).toBe(TEXT);
+```
+
+### トースト
+
+TODO: ここに画像
+
+- chakraだと**region**は最初から表示されているので内部にテキストが出現したことでトーストが表示されたと判断している
+
+```tsx
+const user = userEvent.setup();
+const button = screen.getByRole("button", { name: "トーストを表示" });
+await user.click(button);
+
+const notificationRegion = screen.getByRole("region", {
+  name: "Notifications-bottom",
+});
+const toast = await within(notificationRegion).findByText(
+  "入力に誤りがあります。",
+);
+expect(toast).toBeInTheDocument();
+```
+
+### ツールチップ
+
+TODO: ここに画像
+
+- ロール：**tooltip**
+
+```tsx
+const user = userEvent.setup();
+const text = screen.getByText("ツールチップを表示");
+await user.hover(text);
+
+const tooltip = await screen.findByRole("tooltip");
+expect(tooltip).toBeInTheDocument();
+```
+
 ## 最後に
 
 今回紹介したUIとロールの組み合わせはあくまでchakraの実装なので、別のライブラリであれば異なるロールが付与されていることもあります。自分でUIを実装する際はいくつかのライブラリを比較して適切なロールを選択できるとよさそうです。
