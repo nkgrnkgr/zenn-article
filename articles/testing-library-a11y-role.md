@@ -27,7 +27,7 @@ Testing Libraryでは要素取得に[WAI-ARIA ロールを利用することを�
 
 [chakraのコンポーネント集](https://v2.chakra-ui.com/docs/components)を見てロールをまとめるだけでもいいのですが、せっかくなので自分でchakraのコンポーネントを使ってWebアプリを作り、Testing Libraryを使って自動テストを書いてみました。
 
-[chakraのコンポーネント集](https://v2.chakra-ui.com/docs/components)からよく使われると思われるものやロールに特徴があるもの**26個**を抜粋して作成しています。
+[chakraのコンポーネント集](https://v2.chakra-ui.com/docs/components)からよく使われると思われるものやロールに特徴があるもの**25個**を抜粋して作成しています。
 
 ## 成果物
 
@@ -40,8 +40,31 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/
 
 | UI | Role |
 | ---- | ---- |
-| TD | TD |
-| TD | TD |
+| 警告ダイアログ | alertdialog |
+| 警告表示 | alert |
+| パンくず | navigation |
+| チェックボックス | checkbox |
+| コード表示 | code |
+| 区切り線 | separator |
+| ドロアー | dialog |
+| テキスト入力 | textbox |
+| 見出し | heading |
+| リンク | link |
+| リスト | list, listitem |
+| ローディング | alert |
+| メニュー | menu, menuitem |
+| モーダル | dialog |
+| 数値入力 | spinbutton |
+| ポップオーバー | dialog |
+| プログレスバー | progressbar |
+| ラジオ | radiogroup, radio |
+| セレクト | combobox |
+| スタッツ | term |
+| タブとコンテンツ | tab, tabpanel |
+| テーブル | table, rowgroup, columnheader, row, cell |
+| テキス入力(複数行) | textbox |
+| トースト | - |
+| ツールチップ | tooltip |
 
 ## 事例紹介
 
@@ -515,7 +538,7 @@ expect(
 ).toHaveTextContent("34.5%");
 ```
 
-### テキストエリア（複数行）
+### テキスト入力（複数行）
 
 TODO: ここに画像
 
