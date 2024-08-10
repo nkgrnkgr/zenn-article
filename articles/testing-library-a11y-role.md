@@ -322,7 +322,7 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Li
 
 ![ローディング](https://storage.googleapis.com/zenn-user-upload/78f7d6ea3526-20240808.gif)
 
-- ロール：**alert**
+- ロール：**alert** (chakraでのロール付与はないため実装者がつけているロールになります)
 
 ```tsx
 const loading = screen.getByRole("alert");
@@ -486,8 +486,6 @@ https://github.com/nkgrnkgr/testing-library-and-a11y/tree/main/src/components/Ra
 ![セレクト](https://storage.googleapis.com/zenn-user-upload/3bdd482ff7a5-20240808.gif)
 
 - ロール：**combobox**
-- 本来 combobox は入力可能なtextboxに選択肢も含まれるものを指すと思うので適切ではないのかも？
-- [React Aria](https://react-spectrum.adobe.com/react-aria/index.html) だとクリックされるまでは **button** で選択肢がでてからは**listbox**になっている
 
 ```tsx
 const user = userEvent.setup();
@@ -650,32 +648,3 @@ Elementsタブにアクセシビリティマークが表示されるようにな
 ![checkbox](https://storage.googleapis.com/zenn-user-upload/f0f9f6ba1f81-20240808.png)
 
 ![マーク](https://storage.googleapis.com/zenn-user-upload/4e7591c14e2f-20240808.png)
-
-## 付録B: useIdを使って表示とlabelを紐付ける
-
-入力要素ではない表示要素に対して何の要素なのか説明を紐付ける際に以下のように実装することで読み上げができます。
-
-Reactでは [**useId**](https://ja.react.dev/reference/react/useId) というランダムな id を生成するHooksを提供しています。
-
-これを使うことでa11yの紐付けが容易になります。
-
-またテストでは **getByLabelText** を使うことで表示要素が取得できます。
-
-
-コンポーネント
-```tsx
-const id = useId();
-return (
-  <div>
-    <p id={id}>手数料</p>
-    <p aria-labelledby={id}>250円</p>
-  </div>
-)
-```
-
-テスト
-```tsx
-const fee = screen.getByLabelText('手数料');
-expect(fee.textContent).toBe('250円');
-
-```
