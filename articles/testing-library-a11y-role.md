@@ -6,6 +6,10 @@ topics: ['React', 'TypeScript', "TestingLibrary", "accessibility"] # タグ。["
 published: false # 公開設定（falseにすると下書き）
 ---
 
+:::message
+この記事は、[CYBOZU SUMMER BLOG FES '24](https://cybozu.github.io/summer-blog-fes-2024/) (Frontend Stage) DAY 19の記事です。
+:::
+
 こんにちは！サイボウズ様で業務委託でフロントエンドエンジニアをしている [Nokogiri](https://twitter.com/nkgrnkgr) です。
 このたびはCybozu Summer Blog Fes'24にて執筆の機会をいただきましたので、僭越ながら寄稿させていただきます。
 
